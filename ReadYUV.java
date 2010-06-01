@@ -2,6 +2,7 @@
  * ReadYUV.java
  * By Abdul Arfan
  * 20101204005
+ * can read in color
  */
 
 import java.io.*;
