@@ -59,9 +59,14 @@ public class ReadYUV
 		int U = unsignedByteToInt(oneFrame[(y/2) * (width/2) + x/2 + arraySize]);
 		int V = unsignedByteToInt(oneFrame[(y/2) * (width/2) + x/2 + arraySize + arraySize/4]);
 
-		int R = (int)(Y + 1.370705 * (V-128));
-		int G = (int)(Y - 0.698001 * (V-128) - 0.337633 * (U-128));
-		int B = (int)(Y + 1.732446 * (U-128));
+		//~ int R = (int)(Y + 1.370705 * (V-128));
+		//~ int G = (int)(Y - 0.698001 * (V-128) - 0.337633 * (U-128));
+		//~ int B = (int)(Y + 1.732446 * (U-128)); 
+		
+		int R = (int)(Y + 1.4075 * (V - 128));
+		int G = (int)(Y - 0.3455 * (U - 128) - (0.7169 * (V - 128)));
+		int B =(int) (Y + 1.7790 * (U - 128));
+
 
 		if(R>255) R = 255;
 		if(G>255) G = 255;
@@ -185,9 +190,9 @@ public class ReadYUV
 		WriteYUV wyuv = new WriteYUV(176, 144);
 		wyuv.startWriting("test_qcif.yuv");
 		
-		while((currentImage=ryuv.nextImage())!=null)
+		while((currentImage=ryuv.nextImageYOnly())!=null)
 		{
-			wyuv.writeImage(currentImage);
+			wyuv.writeImageYOnly(currentImage);
 		}
 		
 		wyuv.endWriting();
