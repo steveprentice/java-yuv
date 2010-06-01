@@ -180,12 +180,17 @@ public class ReadYUV
 		BufferedImage currentImage;
 
 		ReadYUV ryuv = new ReadYUV(176, 144); //read the qcif yuv
-
 		ryuv.startReading("akiyo_qcif.yuv");
 		
-		ImageIO.write(ryuv.nextImage(), "png", new File("test.png"));
-		ImageIO.write(ryuv.nextImageYOnly(), "png", new File("test2.png"));
-
+		WriteYUV wyuv = new WriteYUV(176, 144);
+		wyuv.startWriting("test_qcif.yuv");
+		
+		while((currentImage=ryuv.nextImage())!=null)
+		{
+			wyuv.writeImage(currentImage);
+		}
+		
+		wyuv.endWriting();
 		ryuv.endReading();
 	}
 }
